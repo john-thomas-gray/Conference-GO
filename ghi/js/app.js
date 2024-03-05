@@ -18,25 +18,33 @@ function createCard(name, description, pictureUrl,starts, ends, location) {
     `;
   }
 
-window.addEventListener('DOMContentLoaded', async () => {
 
+
+var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+function alert(message, type) {
+  var wrapper = document.createElement('div');
+  wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+
+  alertPlaceholder.append(wrapper);
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
     const url = 'http://localhost:8000/api/conferences/';
 
-    try
-    {
+    try {
         const response = await fetch(url);
 
-        if (!response.ok)
-        {
-            console.log(response.status);
-        }
-        else
-        {
+        if (!response.ok) {
+            alert('Error fetching data!', 'danger');
+            console.log('Response not okay.');
+        } else {
             const data = await response.json();
 
             for (let conference of data.conferences) {
                 const detailUrl = `http://localhost:8000${conference.href}`;
                 const detailResponse = await fetch(detailUrl);
+
                 if (detailResponse.ok) {
                     const details = await detailResponse.json();
                     const name = details.conference.name;
@@ -48,14 +56,14 @@ window.addEventListener('DOMContentLoaded', async () => {
                     const html = createCard(name, description, pictureUrl, starts, ends, location);
                     const column = document.querySelector('.col');
                     column.innerHTML += html;
+                } else {
+                    alert('Error fetching conference details!', 'danger');
                 }
             }
 
-
         }
-    }
-    catch(e)
-    {
-        console.log('Error fetching response');
+    } catch (e) {
+        console.log('Error fetching response', e);
+        alert('An unexpected error occurred!', 'danger');
     }
 });
