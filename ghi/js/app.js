@@ -40,11 +40,11 @@ window.addEventListener('DOMContentLoaded', async () => {
             console.log('Response not okay.');
         } else {
             const data = await response.json();
-
+            let i = 0;
             for (let conference of data.conferences) {
                 const detailUrl = `http://localhost:8000${conference.href}`;
                 const detailResponse = await fetch(detailUrl);
-
+                i++;
                 if (detailResponse.ok) {
                     const details = await detailResponse.json();
                     const name = details.conference.name;
@@ -54,9 +54,30 @@ window.addEventListener('DOMContentLoaded', async () => {
                     const ends = details.conference.ends;
                     const location = details.conference.location.name;
                     const html = createCard(name, description, pictureUrl, starts, ends, location);
-                    const column = document.querySelector('.col');
+                    let column = undefined;
+                    if (i === 1)
+                    {
+                      column = document.getElementById('col1');
+                      console.log('col 1');
+
+                    } else if (i === 2)
+                    {
+                      column = document.getElementById('col2');
+                      console.log('col 2');
+
+                    }
+                    else
+                    {
+                      column = document.getElementById('col3');
+                      console.log('col 3');
+
+                      i = 0;
+                    }
                     column.innerHTML += html;
-                } else {
+
+                }
+                else
+                {
                     alert('Error fetching conference details!', 'danger');
                 }
             }
