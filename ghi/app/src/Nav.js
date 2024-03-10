@@ -1,3 +1,6 @@
+import { NavLink } from "react-router-dom"
+
+
 function Nav() {
     return (
     <header>
@@ -10,13 +13,19 @@ function Nav() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" aria-current="page" href="#">Home</a>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" aria-current="page" href="new-location.html">New location</a>
+              <NavLink to="/conferences/new">Create a conference</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/attendees/new">Attend a conference</NavLink>
             </li>
           <li className="nav-item">
-              <a className="nav-link" aria-current="page" href="new-conference.html">New conference</a>
+              <NavLink to="/locations/new">Create a location</NavLink>
+          </li>
+          <li className="nav-item">
+              <NavLink to="/presentations/new">Create a presentation</NavLink>
           </li>
           </ul>
         </div>
