@@ -35,7 +35,7 @@ export default function PresentationForm(props) {
     data.synopsis = formData.synopsis;
     data.conference = formData.conference;
 
-    console.log("Data: ", formData);
+    // console.log("Data: ", formData);
 
     const presentationUrl = `http://localhost:8000/api/conferences/${formData.conference}/presentations/`;
     const fetchConfig = {

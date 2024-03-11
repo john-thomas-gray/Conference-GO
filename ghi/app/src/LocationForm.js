@@ -60,7 +60,6 @@ function LocationForm(props) {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setStates(data["states"]);
     }
   }

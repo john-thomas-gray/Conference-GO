@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 function ConferenceForm(props) {
 
-  const [locations, setLocations] = useState( [])
+  const [locations, setLocations] = useState([])
 
   const [formData, setFormData] = useState ({
     name: '',

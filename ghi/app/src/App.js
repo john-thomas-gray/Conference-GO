@@ -9,9 +9,6 @@ import MainPage from './MainPage'
 import React, {useState, useEffect} from 'react';
 
 function App(props) {
-  if (props.attendees === undefined) {
-    return null;
-  }
   return (
     <BrowserRouter>
       <Nav />
@@ -20,7 +17,7 @@ function App(props) {
         <Route path="attendees/new" element={<AttendConferenceForm />} />
         <Route path="locations/new" element={<LocationForm />} />
         <Route path="presentations/new" element={<PresentationForm />} />
-        <Route path="attendees" element={<AttendeesList attendees={props.attendees} />} />
+        <Route path="attendees" element={<AttendeesList />} />
         <Route index element={<MainPage />} />
       </Routes>
     </BrowserRouter>
