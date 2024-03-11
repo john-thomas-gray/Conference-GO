@@ -6,6 +6,7 @@ import AttendConferenceForm from './AttendConferenceForm';
 import PresentationForm from './PresentationForm';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from './MainPage'
+import React, {useState, useEffect} from 'react';
 
 function App(props) {
   if (props.attendees === undefined) {

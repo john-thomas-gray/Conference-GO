@@ -31,7 +31,6 @@ function ConferenceForm(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const url = 'http://localhost:8000/api/conferences/';
 
     const fetchConfig = {
@@ -66,16 +65,14 @@ function ConferenceForm(props) {
       [inputName]: value
     });
   }
-
   return (
+
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h1>Create a new conference</h1>
           <form onSubmit={handleSubmit} id="create-conference-form">
-
             <div className="form-floating mb-3">
-
               <input onChange={handleFormChange} placeholder="Name" required type="text" name="name" id="name" className="form-control" value={formData.name}/>
               <label htmlFor="name">Name</label>
             </div>

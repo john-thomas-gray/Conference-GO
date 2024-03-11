@@ -35,7 +35,7 @@ export default function PresentationForm(props) {
     data.synopsis = formData.synopsis;
     data.conference = formData.conference;
 
-    console.log("Data: ", data);
+    console.log("Data: ", formData);
 
     const presentationUrl = `http://localhost:8000/api/conferences/${formData.conference}/presentations/`;
     const fetchConfig = {
@@ -48,7 +48,6 @@ export default function PresentationForm(props) {
 
     const response = await fetch(presentationUrl, fetchConfig);
     if (response.ok) {
-      console.log("initialstate:", initialState);
       setFormData(initialState);
     }
   }

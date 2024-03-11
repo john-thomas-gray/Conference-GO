@@ -78,9 +78,6 @@ export default function AttendConferenceForm() {
   return (
     <div className="my-5 container">
       <div className="row">
-        <div className="col col-sm-auto">
-          <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" />
-        </div>
         <div className="col">
           <div className="card shadow">
             <div className="card-body">
