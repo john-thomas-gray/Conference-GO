@@ -11,17 +11,17 @@ export default function PresentationForm(props) {
     synopsis: '',
     conference: '',
   };
-  const [conferences, setConferences] = useState([]);
+  // const [conferences, setConferences] = useState([]);
   const [formData, setFormData] = useState (initialState);
 
-  const fetchData = async () => {
-    const url = 'http://localhost:8000/api/conferences/';
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      setConferences(data.conferences);
-    }
-  }
+  // const fetchData = async () => {
+  //   const url = 'http://localhost:8000/api/conferences/';
+  //   const response = await fetch(url);
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     setConferences(data.conferences);
+  //   }
+  // }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -62,9 +62,9 @@ export default function PresentationForm(props) {
     });
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="row">
@@ -95,7 +95,7 @@ export default function PresentationForm(props) {
               <div className="mb-3">
                 <select onChange={handleFormChange} required name="conference" id="conference" className="form-select" value={formData.conference}>
                   <option value="">Choose a conference</option>
-                  {conferences.map(conference => {
+                  {props.conferences.map(conference => {
                     return (
                       <option key={conference.id} value={conference.id}>{conference.name}</option>
                     )

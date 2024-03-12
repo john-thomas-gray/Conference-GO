@@ -31,63 +31,55 @@ function ConferenceColumn(props) {
   );
 }
 
-const MainPage = (props) =>  {
+const MainPage = ({ conferences }) =>  {
   const [conferenceColumns, setConferenceColumns] = useState([[], [], []]);
 
-  const fetchData = async () => {
-    const url = 'http://localhost:8000/api/conferences/';
-
+  async function generateConferenceColumns() {
     try {
-      const response = await fetch(url);
-      if (response.ok) {
-        // Get the list of conferences
-        const data = await response.json();
+      const requests = [];
 
-        // Create a list of for all the requests and
-        // add all of the requests to it
-        const requests = [];
-        for (let conference of data.conferences) {
-          const detailUrl = `http://localhost:8000${conference.href}`;
-          requests.push(fetch(detailUrl));
-        }
-
-        // Wait for all of the requests to finish
-        // simultaneously
-        const responses = await Promise.all(requests);
-
-        // Set up the "columns" to put the conference
-        // information into
-        const columns = [[], [], []];
-
-        // Loop over the conference detail responses and add
-        // each to to the proper "column" if the response is
-        // ok
-        let i = 0;
-        for (const conferenceResponse of responses) {
-          if (conferenceResponse.ok) {
-            const details = await conferenceResponse.json();
-            columns[i].push(details);
-            i = i + 1;
-            if (i > 2) {
-              i = 0;
-            }
-          } else {
-            console.error(conferenceResponse);
-          }
-        }
-
-        // Set the state to the new list of three lists of
-        // conferences
-        setConferenceColumns(columns);
+      for (let conference of conferences) {
+        const detailUrl = `http://localhost:8000${conference.href}`;
+        requests.push(fetch(detailUrl));
       }
-    } catch (e) {
+
+      // Wait for all of the requests to finish
+      // simultaneously
+      const responses = await Promise.all(requests);
+
+      // Set up the "columns" to put the conference
+      // information into
+      const columns = [[], [], []];
+
+      // Loop over the conference detail responses and add
+      // each to to the proper "column" if the response is
+      // ok
+      let i = 0;
+      for (const conferenceResponse of responses) {
+        if (conferenceResponse.ok) {
+          const details = await conferenceResponse.json();
+          columns[i].push(details);
+          i = i + 1;
+          if (i > 2) {
+            i = 0;
+          }
+        } else {
+          console.error(conferenceResponse);
+        }
+      }
+
+      // Set the state to the new list of three lists of
+      // conferences
+      setConferenceColumns(columns);
+    }
+     catch (e) {
       console.error(e);
     }
   }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    generateConferenceColumns();
+  }, [conferences]);
 
   return (
     <>
