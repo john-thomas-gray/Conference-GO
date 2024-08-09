@@ -1,4 +1,4 @@
-# Fearless Frontend - Conference GO Plus
+# Conference GO
 
 A full-stack web application that allows users to keep track of conferences, events, and attendees.
 
